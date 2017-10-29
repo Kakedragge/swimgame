@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Air Pocket
+  - player
   layers:
   - Default
   - TransparentFX
