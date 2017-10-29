@@ -278,6 +278,16 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 18.898043
       objectReference: {fileID: 0}
+    - target: {fileID: 61287190680460442, guid: 0e63dc6ff01102e4cb63b1d6ebb94b0b,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61287190680460442, guid: 0e63dc6ff01102e4cb63b1d6ebb94b0b,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.95
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e63dc6ff01102e4cb63b1d6ebb94b0b, type: 2}
   m_IsPrefabParent: 0
@@ -741,10 +751,10 @@ GameObject:
   - component: {fileID: 1485732015}
   - component: {fileID: 1485732014}
   - component: {fileID: 1485732017}
-  - component: {fileID: 1485732018}
   - component: {fileID: 1485732019}
   - component: {fileID: 1485732021}
   - component: {fileID: 1485732020}
+  - component: {fileID: 1485732018}
   m_Layer: 0
   m_Name: SwimMan
   m_TagString: player
@@ -778,7 +788,7 @@ SpriteRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1485732013}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -842,8 +852,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
---- !u!61 &1485732018
-BoxCollider2D:
+--- !u!60 &1485732018
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -864,9 +874,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.055, y: 0.099999994}
+      - {x: -0.024999999, y: 0.099999994}
+      - {x: -0.085, y: 0.08}
+      - {x: -0.085, y: 0.03}
+      - {x: -0.044999998, y: -0.089999996}
+      - {x: -0.015, y: -0.099999994}
+      - {x: 0.015, y: -0.099999994}
+      - {x: 0.055, y: -0.08}
+      - {x: 0.085, y: 0.02}
+      - {x: 0.085, y: 0.06}
 --- !u!114 &1485732019
 MonoBehaviour:
   m_ObjectHideFlags: 0

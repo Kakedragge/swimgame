@@ -44,7 +44,7 @@ public class Swiming : MonoBehaviour
         }
         else
         {
-            rb2D.velocity = rb2D.velocity*-10;
+            rb2D.velocity = new Vector2(0,-5);
         }
 
     }
