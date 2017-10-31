@@ -7,30 +7,66 @@ public class Swiming : MonoBehaviour
 {
 
     public float speed = 2f;
-    private bool atSurface;
-    private bool underWater;
+    private bool onSolidGround;
 
-    Rigidbody2D rb2D;
-    Collider2D playerCollider;
-    Collider2D airPocketCollider;
-
+    private Rigidbody2D rb2D;
+    private Collider2D playerCollider;
 
     // Use this for initialization
     void Start()
     {
         rb2D = GetComponent<Rigidbody2D>();
+        rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb2D.interpolation = RigidbodyInterpolation2D.Extrapolate;
         playerCollider = GameObject.FindGameObjectWithTag("player").GetComponent<Collider2D>();
-        airPocketCollider  = GameObject.FindGameObjectWithTag("Air Pocket").GetComponent<Collider2D>();
-        
 
-        if (playerCollider.IsTouching(airPocketCollider))
+    }
+
+    private bool IsUnderWater()
+     {
+        GameObject[] airPocketObjects = GameObject.FindGameObjectsWithTag("AirPockets");
+        foreach (GameObject obj in airPocketObjects)
         {
-            underWater = false;
+            if (playerCollider.IsTouching(obj.GetComponent<Collider2D>()))
+            {
+                return false;
+            }
+        }
+        if (InWater())
+        {
+            return true;
         }
         else
         {
-            underWater = true;
+            return false;
         }
+    }
+
+    private bool InWater()
+        {
+        GameObject[] waterObjects = GameObject.FindGameObjectsWithTag("Water");
+        foreach (GameObject obj in waterObjects)
+        {
+            if (playerCollider.IsTouching(obj.GetComponent<Collider2D>()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool OnSurface()
+    {
+        GameObject[] surfaceObjects = GameObject.FindGameObjectsWithTag("Surface"); ;
+
+        foreach (GameObject obj in surfaceObjects)
+        {
+            if (playerCollider.IsTouching(obj.GetComponent<Collider2D>()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Update is called once per frame
@@ -39,39 +75,6 @@ public class Swiming : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-
-        if (underWater)
-        {
-            rb2D.velocity = new Vector2(moveHorizontal * speed, moveVertical * speed + 0.5f);
-        }
-        else
-        {
-            
-        }
-
-    }
-
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        atSurface = true;
-    }
-
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Air Pocket"))
-        {
-            underWater = false;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Air Pocket"))
-        {
-            underWater = true;
-            atSurface = false;
-        }
+        
     }
 }
