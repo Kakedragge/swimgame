@@ -96,13 +96,13 @@ public class Swiming : MonoBehaviour
 
         if (Input.GetKeyDown("space")) {
 
-            Vector2 newPos = new Vector2(player.transform.position.x + 5f, player.transform.position.y);
+            Vector3 newPos = new Vector3(player.transform.position.x + (1f*moveHorizontal), player.transform.position.y + (1f*moveVertical), player.transform.position.z);
             print("Called");
-            StartCoroutine(MoveToPosition(player.transform, newPos, 2));
+            StartCoroutine(MoveToPosition(player.transform, newPos, 0.1f));
        }
     }
 
-    public IEnumerator MoveToPosition(Transform transform, Vector2 position, float timeToMove)
+    public IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
     {
         var currentPos = transform.position;
         var t = 0f;
