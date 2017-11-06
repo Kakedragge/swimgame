@@ -8,10 +8,11 @@ public class Swiming : MonoBehaviour
 
     public float speed = 2f;
     private bool onSolidGround;
-
+    private float modified_speed;
     private Rigidbody2D rb2D;
     private Collider2D playerCollider;
     private GameObject player;
+    private float timeLeft;
 
     // Use this for initialization
     void Start()
@@ -21,6 +22,8 @@ public class Swiming : MonoBehaviour
         rb2D.interpolation = RigidbodyInterpolation2D.Extrapolate;
         playerCollider = GameObject.FindGameObjectWithTag("player").GetComponent<Collider2D>();
         player = GameObject.FindGameObjectWithTag("player");
+        timeLeft = 0;
+        modified_speed = speed;
 
     }
 
@@ -94,23 +97,12 @@ public class Swiming : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown("space")) {
-
-            Vector3 newPos = new Vector3(player.transform.position.x + (1f*moveHorizontal), player.transform.position.y + (1f*moveVertical), player.transform.position.z);
-            print("Called");
-            StartCoroutine(MoveToPosition(player.transform, newPos, 0.1f));
-       }
-    }
-
-    public IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
-    {
-        var currentPos = transform.position;
-        var t = 0f;
-        while (t < 1)
+        if (Input.GetKey("space") && IsUnderWater()) {
+            modified_speed = 2 * speed;
+        }
+        else
         {
-            t += Time.deltaTime / timeToMove;
-            transform.position = Vector3.Lerp(currentPos, position, t);
-            yield return null;
+            modified_speed = speed;
         }
     }
 
@@ -122,31 +114,33 @@ public class Swiming : MonoBehaviour
 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        
 
         if (OnSurface())
         {
-            rb2D.velocity = new Vector2(moveHorizontal * speed, 1);
+            rb2D.velocity = new Vector2(moveHorizontal * modified_speed, 1);
             rb2D.gravityScale = 9.81f;
         }
 
         else if (IsUnderWater())
-        {
-            rb2D.velocity = new Vector2(moveHorizontal * speed, moveVertical * speed);
+        {   
+            
+            rb2D.velocity = new Vector2(moveHorizontal * modified_speed, moveVertical * modified_speed);
             rb2D.gravityScale = 0;
         }
 
         else if(InWater() && !IsUnderWater())
         {
-
-            if(moveVertical > 0)
+            
+            
+            if (moveVertical > 0)
             {
-                rb2D.velocity = new Vector2(moveHorizontal * speed, 0);
+               rb2D.velocity = new Vector2(moveHorizontal * modified_speed, 0);
             }
             else
             {
-                rb2D.velocity = new Vector2(moveHorizontal * speed, moveVertical*speed);
+               rb2D.velocity = new Vector2(moveHorizontal * modified_speed, moveVertical * modified_speed);
             }
+            
             rb2D.gravityScale = 0;
         }
         
