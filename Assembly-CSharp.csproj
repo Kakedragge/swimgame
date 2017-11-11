@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AirManagement.cs" />
-     <Compile Include="Assets\Scripts\Swiming.cs" />
+     <Compile Include="Assets\Scripts\Hiding.cs" />
+     <Compile Include="Assets\Scripts\JellyFishMovement.cs" />
+     <Compile Include="Assets\Sprites\Swiming.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -9,16 +9,29 @@ public class Swiming : MonoBehaviour {
 
 	Rigidbody2D rb2D;
 
+	Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		rb2D = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 	}
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
+
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
+		anim.SetFloat ("SwimX", moveHorizontal);
+		anim.SetFloat ("SwimY", moveVertical);
+
+		if (moveHorizontal != 0 || moveVertical != 0) {
+			anim.SetBool ("Swimming", true);
+		} else {
+			anim.SetBool ("Swimming", false);
+		}
+			
 		rb2D.velocity = new Vector2 (moveHorizontal * speed, moveVertical * speed);
+
 	}
 }
