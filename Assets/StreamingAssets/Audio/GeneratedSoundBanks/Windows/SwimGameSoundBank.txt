@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3009755888	Play_maintheme			\Default Work Unit\Play_maintheme	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	856386792	maintheme	C:\Users\Thomas\Documents\swimgame\swimgame_WwiseProject\.cache\Windows\SFX\maintheme_1C9C67B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\maintheme		50403692
+
