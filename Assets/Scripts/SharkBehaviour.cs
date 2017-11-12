@@ -20,16 +20,8 @@ public class SharkBehaviour : MonoBehaviour {
     private uint dangerSoundId = 0;
     private bool inDanger = false;
 
-    [FMODUnity.EventRef]
-    public string dangerMusic = "event:/DangerMusic";
-    FMOD.Studio.EventInstance musicEv;               
-    FMOD.Studio.ParameterInstance volumeParameter;
-
     // Use this for initialization
     void Start () {
-
-        musicEv = FMODUnity.RuntimeManager.CreateInstance(dangerMusic);
-        musicEv.getParameter("end", out volumeParameter);
 
         shark = GameObject.FindGameObjectWithTag("Shark");
         player = GameObject.FindGameObjectWithTag("player");
@@ -47,8 +39,6 @@ public class SharkBehaviour : MonoBehaviour {
     void Update () {
 
         shark.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-
-        UpdateSoundState();
 
         if (SharkOnPath() && (FindPlayerDistance() > MaxDistance))
         {
@@ -84,40 +74,6 @@ public class SharkBehaviour : MonoBehaviour {
             GoBackOnPath(speed * Time.deltaTime);
             reverse = false;
         }
-    }
-
-    public void UpdateSoundState()
-    {
-        if(FindPlayerDistance() < MaxDistance && InDangerZone())
-        {
-            FMOD.Studio.PLAYBACK_STATE play_state;
-            musicEv.getPlaybackState(out play_state);
-            if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                volumeParameter.setValue(FindPlayerDistance());
-                musicEv.start();
-
-            }
-            else
-            {
-                volumeParameter.setValue(FindPlayerDistance());
-            }
-        }
-        else
-        {
-            FMOD.Studio.PLAYBACK_STATE play_state;
-            musicEv.getPlaybackState(out play_state);
-            if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-            {
-                volumeParameter.setValue(2.0f);
-                musicEv.start();
-
-            }
-            else
-            {
-                volumeParameter.setValue(2.0f);
-            }
-        }   
     }
 
     

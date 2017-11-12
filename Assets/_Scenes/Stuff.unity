@@ -874,6 +874,8 @@ GameObject:
   - component: {fileID: 1485732020}
   - component: {fileID: 1485732018}
   - component: {fileID: 1485732022}
+  - component: {fileID: 1485732024}
+  - component: {fileID: 1485732025}
   m_Layer: 0
   m_Name: SwimMan
   m_TagString: player
@@ -971,7 +973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  dangerMusic: event:/Main
   swimSound: event:/Swim
 --- !u!61 &1485732018
 BoxCollider2D:
@@ -1068,6 +1069,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc99bdc63d21414aa03b889c3d5a6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1485732024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1485732013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 156ff613e7c41c7468b0887afe1d87ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+--- !u!114 &1485732025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1485732013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b0f1d8345a8024d8a2c39a1e7fb012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMusic: event:/Main
+  dangerMusic: event:/Main
 --- !u!1 &1606082786
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,8 +1125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342580940c3e1a4469e20dc1c09cde15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDefaultListener: 1
-  listenerId: 0
 --- !u!124 &1606082788
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1174,18 +1198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d770fdaf1ade42479a47a8a10097cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_positionOffsetData:
-    positionOffset: {x: 0, y: 0, z: 0}
-    KeepMe: 0
-  isEnvironmentAware: 0
-  isStaticObject: 0
-  m_Collider: {fileID: 0}
-  m_listeners:
-    listenerIdList: []
-    changed: 0
-    initialListenerList: []
-  m_posOffsetData: {fileID: 0}
-  listenerMask: 1
 --- !u!1001 &1625661611
 Prefab:
   m_ObjectHideFlags: 0
