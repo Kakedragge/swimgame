@@ -15,6 +15,11 @@ sysinfo.txt
 *.meta
 *.mdb
 *.log
+
+/Assets/FMODStudioCache.asset
+/Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
  
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
