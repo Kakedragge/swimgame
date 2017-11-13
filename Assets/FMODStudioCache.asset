@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 114664281407367782}
-  - {fileID: 114974648732213698}
+  - {fileID: 114474494495038038}
+  - {fileID: 114253152920291078}
   EditorEvents:
-  - {fileID: 114614171696300608}
-  - {fileID: 114538374756910478}
-  - {fileID: 114399494795698062}
-  - {fileID: 114409445177876926}
-  - {fileID: 114670313238774680}
-  MasterBankRef: {fileID: 114974648732213698}
-  StringsBankRef: {fileID: 114664281407367782}
-  stringsBankWriteTime: 636461786010747854
+  - {fileID: 114265099391194940}
+  - {fileID: 114196867488252676}
+  - {fileID: 114809223755908292}
+  - {fileID: 114342348664986738}
+  - {fileID: 114903103392973036}
+  MasterBankRef: {fileID: 114253152920291078}
+  StringsBankRef: {fileID: 114474494495038038}
+  stringsBankWriteTime: 636461801222642429
   cacheVersion: 2
 --- !u!114 &114000660368268972
 MonoBehaviour:
@@ -320,6 +320,29 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114196867488252676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Swim
+  guid: 475d7e64de46934dbca4949332e18074
+  Banks:
+  - {fileID: 114253152920291078}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114741345660396850}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 800
 --- !u!114 &114205435014227642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +463,46 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1131
+--- !u!114 &114253152920291078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\thoma\Documents\FMOD Studio\swimgame_music\Build\Desktop\Master Bank.bank
+  lastModified: 636461801222602372
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 8990784
+  Exists: 1
+--- !u!114 &114265099391194940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/WaterSplash
+  guid: 4148887a2f8e10409884750ef2d101cc
+  Banks:
+  - {fileID: 114253152920291078}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1131
 --- !u!114 &114277514605497976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +578,29 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114342348664986738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/DangerMusic
+  guid: 5cf22869d4b1a745aef36724ac5832b4
+  Banks:
+  - {fileID: 114253152920291078}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114820460630024610}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 47151
 --- !u!114 &114377659001820774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +801,24 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114474494495038038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: C:\Users\thoma\Documents\FMOD Studio\swimgame_music\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636461801222642429
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 894
+  Exists: 1
 --- !u!114 &114481456532336984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,6 +1379,21 @@ MonoBehaviour:
   Min: 1
   Max: 4
   Default: 1
+--- !u!114 &114741345660396850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsSwimming
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114748040438094100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1439,21 @@ MonoBehaviour:
   Min: 1
   Max: 4
   Default: 1
+--- !u!114 &114759675182348606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Underwater
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114760257569004698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,6 +1499,30 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114809223755908292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Main
+  guid: 4860939ee5b9924f994bc491ce91379a
+  Banks:
+  - {fileID: 114253152920291078}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114759675182348606}
+  - {fileID: 114953790494252600}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 558053
 --- !u!114 &114812225993647844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,6 +1539,21 @@ MonoBehaviour:
   Max: 2
   Default: 0
 --- !u!114 &114813457517251328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: end
+  Min: 0
+  Max: 2
+  Default: 0
+--- !u!114 &114820460630024610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1509,7 +1682,45 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 558053
+--- !u!114 &114903103392973036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/Walking
+  guid: 67f1e77478b7804a9442dab4a4df4c14
+  Banks:
+  - {fileID: 114253152920291078}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 114937857402268356}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1000
 --- !u!114 &114922327500226062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: step
+  Min: 1
+  Max: 4
+  Default: 1
+--- !u!114 &114937857402268356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1576,6 +1787,21 @@ MonoBehaviour:
   Name: end
   Min: 0
   Max: 2
+  Default: 0
+--- !u!114 &114953790494252600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Shark
+  Min: 0
+  Max: 1
   Default: 0
 --- !u!114 &114961656675075700
 MonoBehaviour:
