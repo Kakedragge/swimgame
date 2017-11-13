@@ -42,8 +42,8 @@ public class Walking : MonoBehaviour {
         if (OnSurface())
         {
             
-            rb2D.gravityScale = 9.81f;
-            rb2D.velocity = new Vector2(moveHorizontal * speed, 1);
+            rb2D.gravityScale =  1.0f;
+            rb2D.velocity = new Vector2(moveHorizontal * speed, 0);
         }
     }
 }

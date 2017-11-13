@@ -233,7 +233,7 @@ public class Swiming : MonoBehaviour
         
         else
         {
-            rb2D.gravityScale = 9.81f;
+            rb2D.gravityScale = 1.0f;
         }
     }
 }
