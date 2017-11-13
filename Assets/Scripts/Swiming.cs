@@ -164,26 +164,6 @@ public class Swiming : MonoBehaviour
 
     
 
-    void Update()
-    {
-        
-
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
-
-        if (Input.GetKey("space") && IsUnderWater()) {
-            modified_speed = 2 * speed;
-            swimmingValue = 0.5f;
-        }
-        else
-        {
-            modified_speed = speed;
-            swimmingValue = 1.0f;
-        }
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -193,7 +173,18 @@ public class Swiming : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        
+        UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
+
+        if (Input.GetKey("space") && IsUnderWater())
+        {
+            modified_speed = 2 * speed;
+            swimmingValue = 0.5f;
+        }
+        else
+        {
+            modified_speed = speed;
+            swimmingValue = 1.0f;
+        }
 
         if (IsUnderWater())
         {   
