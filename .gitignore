@@ -16,15 +16,15 @@ sysinfo.txt
 *.meta
 *.dwlt
 
-/Assets/FMODStudioCache.asset
-/Assets/FMODStudioCache.asset.meta
-/fmod.log
-/fmod_editor.log
-/Assets/StreamingAssets/*
-/Library/CurrentLayout.dwlt
-/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
-/Library/metadata/*
-/Library/assetDatabase3
+Assets/FMODStudioCache.asset
+Assets/FMODStudioCache.asset.meta
+fmod.log
+fmod_editor.log
+Assets/StreamingAssets/*
+Library/CurrentLayout.dwlt
+Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
+Library/metadata/*
+Library/assetDatabase3
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
