@@ -43,7 +43,7 @@ public class Walking : MonoBehaviour {
         {
             
             rb2D.gravityScale =  1.0f;
-            rb2D.velocity = new Vector2(moveHorizontal * speed, 0);
+            rb2D.velocity = new Vector2(moveHorizontal * speed, rb2D.velocity.y);
         }
     }
 }
