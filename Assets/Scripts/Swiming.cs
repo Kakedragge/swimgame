@@ -47,6 +47,10 @@ public class Swiming : MonoBehaviour
 
     }
 
+	private void FackYou() {
+		print ("Fack U");
+	}
+
     public bool InDangerZone()
     {
         Vector3 StartPos = shark.transform.position;
