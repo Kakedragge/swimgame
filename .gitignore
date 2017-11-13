@@ -11,10 +11,6 @@ sysinfo.txt
 /Assets/AssetStoreTools*
 *.apk
 *.unitypackage
-*.asset
-*.meta
-*.mdb
-*.log
 
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
