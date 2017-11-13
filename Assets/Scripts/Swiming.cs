@@ -7,6 +7,7 @@ public class Swiming : MonoBehaviour
 {
 
     public float speed = 2f;
+
     private bool onSolidGround;
     private float modified_speed;
     private Rigidbody2D rb2D;
@@ -20,6 +21,7 @@ public class Swiming : MonoBehaviour
     private uint playingMusicId = 0;
     private float DangerZone = 7.5f;
     private float swimmingValue = 1.0f;
+    private Animator anim;
 
     //Player location states
 
@@ -41,7 +43,7 @@ public class Swiming : MonoBehaviour
         timeLeft = 0;
         modified_speed = speed;
         swimEv.getParameter("IsSwimming", out isSwimming);
-
+        anim = GetComponent<Animator>();
 
     }
 
@@ -161,10 +163,8 @@ public class Swiming : MonoBehaviour
         }
         return false;
     }
+		
 
-    
-
-    // Update is called once per frame
     void FixedUpdate()
     {
 
@@ -173,20 +173,30 @@ public class Swiming : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
+        anim.SetFloat("SwimX", moveHorizontal);
+        anim.SetFloat("SwimY", moveVertical);
 
-        //Added comment
-
-        if (Input.GetKey("space") && IsUnderWater())
+        if (moveHorizontal != 0 || moveVertical != 0)
         {
-            modified_speed = 2 * speed;
-            swimmingValue = 0.5f;
+            anim.SetBool("Swimming", true);
         }
         else
         {
-            modified_speed = speed;
-            swimmingValue = 1.0f;
+            anim.SetBool("Swimming", false);
         }
+
+        UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
+
+		if (Input.GetKey(KeyCode.LeftShift) && IsUnderWater())
+		{
+			modified_speed = 2 * speed;
+			swimmingValue = 0.5f;
+		}
+		else
+		{
+			modified_speed = speed;
+			swimmingValue = 1.0f;
+		}
 
         if (IsUnderWater())
         {   

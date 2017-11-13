@@ -27,7 +27,18 @@ public class AirManagement : MonoBehaviour {
 		SetStaminaText ();
 	}
 
-	void OnTriggerEnter2D(Collider2D other) 
+    public int getStamina()
+    {
+        return stamina;
+    }
+
+
+    public void setStamina(int newStamina)
+    {
+        stamina = newStamina;
+    }
+
+    void OnTriggerEnter2D(Collider2D other) 
 	{
 		if (other.gameObject.CompareTag ("Air Pocket")) 
 		{
