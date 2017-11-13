@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 114670313238774680}
   MasterBankRef: {fileID: 114974648732213698}
   StringsBankRef: {fileID: 114664281407367782}
-  stringsBankWriteTime: 636461733991089402
+  stringsBankWriteTime: 636461786010747854
   cacheVersion: 2
 --- !u!114 &114000660368268972
 MonoBehaviour:
@@ -169,7 +169,37 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+--- !u!114 &114138876182553674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Underwater
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114139704263874976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: step
+  Min: 1
+  Max: 4
+  Default: 1
+--- !u!114 &114146063850938256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -222,6 +252,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114174983449006192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Shark
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114176586225195594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +290,21 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
+--- !u!114 &114183585168508986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsSwimming
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114183586366859936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +359,21 @@ MonoBehaviour:
   Max: 1
   Default: 0
 --- !u!114 &114220399119793410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: end
+  Min: 0
+  Max: 2
+  Default: 0
+--- !u!114 &114222073894227654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -395,6 +470,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114294556300072626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Underwater
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114308725180543440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +545,21 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+--- !u!114 &114394605304065046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Shark
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114399494795698062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,8 +579,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114673283354639808}
-  - {fileID: 114879093549529464}
+  - {fileID: 114138876182553674}
+  - {fileID: 114394605304065046}
   MinDistance: 0
   MaxDistance: 0
   Length: 558053
@@ -498,7 +603,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114377659001820774}
+  - {fileID: 114961656675075700}
   MinDistance: 0
   MaxDistance: 0
   Length: 47151
@@ -592,6 +697,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: IsSwimming
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114461451589245464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Underwater
   Min: 0
   Max: 1
   Default: 0
@@ -704,10 +824,10 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114874427819378464}
+  - {fileID: 114183585168508986}
   MinDistance: 0
   MaxDistance: 0
-  Length: 1020
+  Length: 800
 --- !u!114 &114558859611583842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +1035,21 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+--- !u!114 &114647024942221900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsSwimming
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114658050417337948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -961,7 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:\NTNUhost17\spilldesign\Lyd Prosjekt\swimgame_music\Build\Desktop\Master
     Bank.strings.bank
-  lastModified: 636461733991089402
+  lastModified: 636461786010747854
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -1001,7 +1136,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 114922327500226062}
+  - {fileID: 114873671447307782}
   MinDistance: 0
   MaxDistance: 0
   Length: 1000
@@ -1017,6 +1152,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Underwater
+  Min: 0
+  Max: 1
+  Default: 0
+--- !u!114 &114678425612126222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: IsSwimming
   Min: 0
   Max: 1
   Default: 0
@@ -1079,6 +1229,36 @@ MonoBehaviour:
   Name: Shark
   Min: 0
   Max: 1
+  Default: 0
+--- !u!114 &114731347199564762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: step
+  Min: 1
+  Max: 4
+  Default: 1
+--- !u!114 &114735684102114660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: end
+  Min: 0
+  Max: 2
   Default: 0
 --- !u!114 &114737567678930372
 MonoBehaviour:
@@ -1260,6 +1440,21 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+--- !u!114 &114873671447307782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: step
+  Min: 1
+  Max: 4
+  Default: 1
 --- !u!114 &114874427819378464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,6 +1524,21 @@ MonoBehaviour:
   Min: 1
   Max: 4
   Default: 1
+--- !u!114 &114940990938122542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Shark
+  Min: 0
+  Max: 1
+  Default: 0
 --- !u!114 &114941074613457176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,6 +1563,21 @@ MonoBehaviour:
   MaxDistance: 0
   Length: 47151
 --- !u!114 &114951727862278918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: end
+  Min: 0
+  Max: 2
+  Default: 0
+--- !u!114 &114961656675075700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1410,11 +1635,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:\NTNUhost17\spilldesign\Lyd Prosjekt\swimgame_music\Build\Desktop\Master
     Bank.bank
-  lastModified: 636461733991034137
+  lastModified: 636461786010703319
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 8890208
+    Value: 8990784
   Exists: 1
 --- !u!114 &114979573495711318
 MonoBehaviour:
