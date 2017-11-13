@@ -175,6 +175,8 @@ public class Swiming : MonoBehaviour
 
         UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
 
+        //Added comment
+
         if (Input.GetKey("space") && IsUnderWater())
         {
             modified_speed = 2 * speed;
