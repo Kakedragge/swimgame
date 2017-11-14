@@ -22,7 +22,6 @@ public class Swiming : MonoBehaviour
     private float DangerZone = 7.5f;
     private float swimmingValue = 1.0f;
     private Animator anim;
-
     //Player location states
 
     [FMODUnity.EventRef]
@@ -44,7 +43,6 @@ public class Swiming : MonoBehaviour
         modified_speed = speed;
         swimEv.getParameter("IsSwimming", out isSwimming);
         anim = GetComponent<Animator>();
-
     }
 
 	private void FackYou() {
@@ -80,8 +78,6 @@ public class Swiming : MonoBehaviour
         return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) + Mathf.Pow(y2 - y1, 2));
 
     }
-
-    
 
     private void UpdateSoundState(bool isMoving)
     {
