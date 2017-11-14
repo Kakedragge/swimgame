@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Hiding : MonoBehaviour {
 
-	private bool isHiding = false;
-
+	GameObject Shark;
 
 	// Use this for initialization
 	void Start () {
-		
+		Shark = GameObject.Find("Shark");
 	}
 	
 	// Update is called once per frame
@@ -21,8 +20,7 @@ public class Hiding : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Hide Element")) 
 		{
-			isHiding = true;
-			Debug.Log (isHiding.ToString());
+			Shark.SendMessage ("setIsHiding", true);
 		}
 	}
 
@@ -30,8 +28,7 @@ public class Hiding : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Hide Element")) 
 		{
-			isHiding = false;
-			Debug.Log (isHiding.ToString());
+			Shark.SendMessage ("setIsHiding", false);
 		}
 	}
 

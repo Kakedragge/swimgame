@@ -19,6 +19,8 @@ public class SharkBehaviour : MonoBehaviour {
     private GameObject player;
     private uint dangerSoundId = 0;
     private bool inDanger = false;
+	private bool isHiding;
+	private Animator anim;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +33,8 @@ public class SharkBehaviour : MonoBehaviour {
 
         StartPos = shark.transform.position;
         EndPos = new Vector3(StartPos.x + travelDistance, StartPos.y, StartPos.z);
-
+		isHiding = false;
+		anim = GetComponent<Animator>();
 
     }
 
@@ -40,7 +43,7 @@ public class SharkBehaviour : MonoBehaviour {
 
         shark.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
 
-        if (SharkOnPath() && (FindPlayerDistance() > MaxDistance))
+		if (SharkOnPath() && (FindPlayerDistance() > MaxDistance) && isHiding)
         {
             float step = speed * Time.deltaTime;
 
@@ -50,6 +53,7 @@ public class SharkBehaviour : MonoBehaviour {
                 if(transform.position.x >= EndPos.x)
                 {
                     reverse = !reverse;
+					anim.SetBool("SwimLeft", true);
                 }
             }
             else
@@ -58,11 +62,12 @@ public class SharkBehaviour : MonoBehaviour {
                 if(transform.position.x <= StartPos.x)
                 {
                     reverse = !reverse;
+					anim.SetBool("SwimLeft", false);
                 }
             }
 
         }
-        else if(FindPlayerDistance() < MaxDistance && InDangerZone())
+		else if(FindPlayerDistance() < MaxDistance && InDangerZone() && !isHiding)
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
@@ -139,4 +144,10 @@ public class SharkBehaviour : MonoBehaviour {
 
         return distance;
     }
+
+	public void setIsHiding(bool hiding) {
+		isHiding = hiding;
+
+	}
+
 }

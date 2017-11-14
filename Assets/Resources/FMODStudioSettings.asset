@@ -13,9 +13,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: C:\Users\thoma\Documents\FMOD Studio\swimgame_music\swimgame.fspro
-  SourceProjectPathUnformatted: C:\Users\thoma\Documents\FMOD Studio\swimgame_music\swimgame.fspro
-  SourceBankPathUnformatted: C:\Users\thoma\Documents\FMOD Studio\swimgame_music\Build
+  sourceProjectPath: D:\NTNUhost17\spilldesign\Lyd Prosjekt\swimgame_music\swimgame.fspro
+  SourceProjectPathUnformatted: D:\NTNUhost17\spilldesign\Lyd Prosjekt\swimgame_music\swimgame.fspro
+  SourceBankPathUnformatted: D:\NTNUhost17\spilldesign\Lyd Prosjekt\swimgame_music\Build
   AutomaticEventLoading: 1
   AutomaticSampleLoading: 0
   ImportType: 0
