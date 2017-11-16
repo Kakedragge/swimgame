@@ -23,7 +23,7 @@ public class SharkBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        shark = GameObject.FindGameObjectWithTag("Shark");
+        shark = gameObject;
         player = GameObject.FindGameObjectWithTag("player");
         speed = 1.0f;
         travelDistance = 5.0f;
