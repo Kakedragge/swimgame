@@ -28,7 +28,8 @@ public class SharkBehaviour : MonoBehaviour {
         shark = GameObject.FindGameObjectWithTag("Shark");
         player = GameObject.FindGameObjectWithTag("player");
         speed = 1.0f;
-        DangerZone = travelDistance*1.5f;
+
+        DangerZone = 1.5f*travelDistance;
 
         StartPos = shark.transform.position;
         EndPos = new Vector3(StartPos.x + travelDistance, StartPos.y, StartPos.z);
@@ -115,11 +116,9 @@ public class SharkBehaviour : MonoBehaviour {
 
     public bool InDangerZone()
     {
-        float start_X = StartPos.x;
-        float end_X = EndPos.x;
-
-        float pos_X = start_X + (end_X - start_X) / 2;
-        float pos_Y = player.transform.position.y;
+        
+        float pos_X = StartPos.x + ((EndPos.x - StartPos.x)/2);
+        float pos_Y = StartPos.y;
 
         float distance = FindDistance(pos_X, pos_Y, player.transform.position.x, player.transform.position.y);
         
