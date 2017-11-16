@@ -26,7 +26,7 @@ public class SharkBehaviour : MonoBehaviour {
         shark = gameObject;
         player = GameObject.FindGameObjectWithTag("player");
         speed = 1.0f;
-        travelDistance = 5.0f;
+        travelDistance = 10.0f;
         DangerZone = 1.5f*travelDistance;
 
         StartPos = shark.transform.position;

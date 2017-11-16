@@ -24,15 +24,11 @@ public class Swiming : MonoBehaviour
     private Animator anim;
     //Player location states
 
-    [FMODUnity.EventRef]
-    public string swimSound = "event:/Swim";
-    FMOD.Studio.EventInstance swimEv;
-    FMOD.Studio.ParameterInstance isSwimming;
+    
 
     // Use this for initialization
     void Start()
     {
-        swimEv = FMODUnity.RuntimeManager.CreateInstance(swimSound);
         rb2D = GetComponent<Rigidbody2D>();
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb2D.interpolation = RigidbodyInterpolation2D.Extrapolate;
@@ -41,7 +37,6 @@ public class Swiming : MonoBehaviour
         shark = GameObject.FindGameObjectWithTag("Shark");
         timeLeft = 0;
         modified_speed = speed;
-        swimEv.getParameter("IsSwimming", out isSwimming);
         anim = GetComponent<Animator>();
     }
 
@@ -77,41 +72,6 @@ public class Swiming : MonoBehaviour
     {
         return Mathf.Sqrt(Mathf.Pow(x2 - x1, 2) + Mathf.Pow(y2 - y1, 2));
 
-    }
-
-    private void UpdateSoundState(bool isMoving)
-    {
-
-        FMOD.Studio.PLAYBACK_STATE play_state1;
-        swimEv.getPlaybackState(out play_state1);
-
-        if (play_state1 != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
-
-            if (!isMoving || !InWater())
-            {
-                isSwimming.setValue(0);
-            }
-            
-            else
-            {
-                isSwimming.setValue(swimmingValue);
-            }
-
-            swimEv.start();
-
-        }
-        else
-        {
-            if (!isMoving || !InWater())
-            {
-                isSwimming.setValue(0);
-            }
-            else
-            {
-                isSwimming.setValue(swimmingValue);
-            }
-        }
     }
 
     private bool IsUnderWater()
@@ -185,7 +145,7 @@ public class Swiming : MonoBehaviour
             anim.SetBool("Swimming", false);
         }
 
-        UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
+        
 
 		if (Input.GetKey(KeyCode.LeftShift) && IsUnderWater())
 		{
@@ -231,5 +191,6 @@ public class Swiming : MonoBehaviour
         {
             rb2D.gravityScale = 1.0f;
         }
+		FindObjectOfType<SoundManager> ().UpdateSwimming (moveHorizontal != 0 || moveVertical != 0, InWater(),swimmingValue);
     }
 }
