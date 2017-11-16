@@ -8,7 +8,7 @@ public class SharkBehaviour : MonoBehaviour {
     
     public float MaxDistance = 2;
     private float DangerZone;
-    private float travelDistance;
+	public float travelDistance = 5.0f;
     private bool reverse = false;
     public float speed;
 
@@ -28,7 +28,6 @@ public class SharkBehaviour : MonoBehaviour {
         shark = GameObject.FindGameObjectWithTag("Shark");
         player = GameObject.FindGameObjectWithTag("player");
         speed = 1.0f;
-        travelDistance = 5.0f;
         DangerZone = travelDistance*1.5f;
 
         StartPos = shark.transform.position;
