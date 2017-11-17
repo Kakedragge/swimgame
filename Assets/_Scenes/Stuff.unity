@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOut: 2
-  black: {fileID: 0}
-  canvas: {fileID: 0}
+  black: {fileID: 294948923}
+  canvas: {fileID: 1377764485}
 --- !u!1 &67988018
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 67988022}
   - component: {fileID: 67988021}
   - component: {fileID: 67988020}
+  - component: {fileID: 67988024}
   m_Layer: 5
   m_Name: MenuPanel
   m_TagString: Untagged
@@ -430,6 +431,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 67988018}
+--- !u!114 &67988024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 67988018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bab0e0c2fdead408252542b4f73bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  selectedGameObject: {fileID: 0}
 --- !u!1 &148351859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,8 +1031,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOut: 2
-  black: {fileID: 0}
-  canvas: {fileID: 0}
+  black: {fileID: 294948923}
+  canvas: {fileID: 1377764485}
 --- !u!114 &322982164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5800,8 +5814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOut: 2
-  black: {fileID: 0}
-  canvas: {fileID: 0}
+  black: {fileID: 294948923}
+  canvas: {fileID: 1377764485}
 --- !u!114 &1616269172
 MonoBehaviour:
   m_ObjectHideFlags: 0
