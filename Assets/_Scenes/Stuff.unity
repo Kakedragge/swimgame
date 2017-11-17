@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67bab0e0c2fdead408252542b4f73bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
-  selectedGameObject: {fileID: 0}
+  eventSystem: {fileID: 967174817}
+  selectedGameObject: {fileID: 64572452}
 --- !u!1 &148351859
 GameObject:
   m_ObjectHideFlags: 0
