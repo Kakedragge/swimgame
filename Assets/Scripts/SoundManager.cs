@@ -34,6 +34,17 @@ public class SoundManager : MonoBehaviour {
 		InitiliazeWalking (false);
 	}
 
+	public void PauseAll(){
+		isWalking.setValue (0.0f);
+		muteParameter.setValue (1.0f);
+		volumeParameter.setValue (2.0f);
+		isSwimming.setValue (0.0f);
+	}
+
+	public void ResumeAll(){
+		muteParameter.setValue (0.0f);
+	}
+
 	void InitiliazeWalking(bool Walking){
 		walkEv = FMODUnity.RuntimeManager.CreateInstance(walkMusic);
 		walkEv.getParameter("Walking", out isWalking);
@@ -219,6 +230,9 @@ public class SoundManager : MonoBehaviour {
 
     public void StopAllMusic()
     {
+
+		print ("Stops music");
+
         musicEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         musicEv.release();
 

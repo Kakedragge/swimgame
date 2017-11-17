@@ -6,6 +6,6 @@ public class CollisionScript : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Shark")
-            FindObjectOfType<GameManager>().EndGame();
+			FindObjectOfType<GameManager>().RestartGame();
     }
 }

@@ -9,6 +9,9 @@ TagManager:
   - Water
   - Surface
   - Shark
+  - Jelly Fish
+  - FadeImage
+  - PauseCanvas
   layers:
   - Default
   - TransparentFX

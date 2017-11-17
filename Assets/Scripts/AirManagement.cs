@@ -13,7 +13,7 @@ public class AirManagement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetStaminaText ();
+		//SetStaminaText ();
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class AirManagement : MonoBehaviour {
 		if (isWater == true) {
 			stamina -= 1;
 		}
-		SetStaminaText ();
+		//SetStaminaText ();
 	}
 
     public int getStamina()
@@ -55,7 +55,7 @@ public class AirManagement : MonoBehaviour {
 		}
 	}
 
-	void SetStaminaText() {
+	/*void SetStaminaText() {
 		staminaText.text = "Air: " + stamina.ToString();
-	}
+	}*/
 }
