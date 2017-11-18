@@ -8,12 +8,16 @@ public class SharkBehaviour : MonoBehaviour {
     
     public float MaxDistance = 2;
     private float DangerZone;
-	public float travelDistance = 5.0f;
+	public float travelDistance;
     private bool reverse = false;
     public float speed;
+	public float chargeSpeed;
 
     private Vector3 StartPos;
     private Vector3 EndPos;
+
+	private float speedX;
+	private float speedY;
 
     private GameObject shark;
     private GameObject player;
@@ -25,14 +29,17 @@ public class SharkBehaviour : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        shark = GameObject.FindGameObjectWithTag("Shark");
+		shark = gameObject;
         player = GameObject.FindGameObjectWithTag("player");
-        speed = 1.0f;
+        
 
         DangerZone = 1.5f*travelDistance;
 
         StartPos = shark.transform.position;
+		print (travelDistance);
+		print (StartPos.x + travelDistance);
         EndPos = new Vector3(StartPos.x + travelDistance, StartPos.y, StartPos.z);
+		print (EndPos [0]);
 		isHiding = false;
 		anim = GetComponent<Animator>();
 
@@ -42,42 +49,55 @@ public class SharkBehaviour : MonoBehaviour {
     void Update () {
 
         shark.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-
-		if (SharkOnPath() && (FindPlayerDistance() > MaxDistance) && isHiding)
+		if (SharkOnPath() && (FindPlayerDistance() > MaxDistance || isHiding))
         {
             float step = speed * Time.deltaTime;
 
             if (!reverse)
             {
+				float Xposition = transform.position [0];
+				float Yposition = transform.position [1];
                 transform.position = Vector3.MoveTowards(transform.position, EndPos, step);
+				anim.SetFloat("speedX", Xposition - transform.position [0]);
+				anim.SetFloat("speedY", Yposition - transform.position [1]);
                 if(transform.position.x >= EndPos.x)
                 {
                     reverse = !reverse;
-					anim.SetBool("SwimLeft", true);
                 }
             }
             else
-            {
+            {	
+				float Xposition = transform.position [0];
+				float Yposition = transform.position [1];
                 transform.position = Vector3.MoveTowards(transform.position, StartPos, step);
+				anim.SetFloat("speedX", Xposition - transform.position [0]);
+				anim.SetFloat("speedY", Yposition - transform.position [1]);
                 if(transform.position.x <= StartPos.x)
                 {
                     reverse = !reverse;
-					anim.SetBool("SwimLeft", false);
                 }
             }
 
         }
 		else if(FindPlayerDistance() < MaxDistance && InDangerZone() && !isHiding)
         {
-            float step = speed * Time.deltaTime;
+			float step = chargeSpeed * Time.deltaTime;
+			float Xposition = transform.position [0];
+			float Yposition = transform.position [1];
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+			anim.SetFloat("speedX", Xposition - transform.position [0]);
+			anim.SetFloat("speedY", Yposition - transform.position [1]);
             
         }
         else
         {
-            
-            GoBackOnPath(speed * Time.deltaTime);
+			float Xposition = transform.position [0];
+			float Yposition = transform.position [1];
+			GoBackOnPath(speed * Time.deltaTime);
+			anim.SetFloat("speedX", Xposition - transform.position [0]);
+			anim.SetFloat("speedY", Yposition - transform.position [1]);
             reverse = false;
+			//print ("Go back");
         }
     }
 
@@ -94,7 +114,7 @@ public class SharkBehaviour : MonoBehaviour {
         float sharkPosX = shark.transform.position.x;
         float sharkPosY = shark.transform.position.y;
 
-        if((sharkPosX >= start_X && sharkPosX <= end_X) && (sharkPosY >= start_Y && sharkPosY <= end_Y))
+		if((sharkPosX >= start_X && sharkPosX <= end_X) && (sharkPosY - 0.1 <= start_Y && sharkPosY + 0.1 >= end_Y))
         {
             return true;
         }
@@ -104,8 +124,8 @@ public class SharkBehaviour : MonoBehaviour {
 
     public void GoBackOnPath(float step)
     {
-
-        transform.position = Vector3.MoveTowards(transform.position, StartPos, step);
+		float antispeed = step/FindDistance (transform.position.x, transform.position.y, StartPos.x, StartPos.y);
+		transform.position = Vector3.MoveTowards(transform.position, StartPos, step + antispeed/2);
     }
 
     private float FindDistance(float x1, float y1, float x2, float y2)

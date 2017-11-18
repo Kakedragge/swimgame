@@ -21,6 +21,7 @@ public class Swiming : MonoBehaviour
     private uint playingMusicId = 0;
     private float DangerZone = 7.5f;
     private float swimmingValue = 1.0f;
+	private bool stunned = false;
     private Animator anim;
     //Player location states
 
@@ -149,6 +150,10 @@ public class Swiming : MonoBehaviour
         }
     }
 
+	public void setStunned (bool isStunned) {
+		stunned = isStunned;
+	}
+
     private bool InWater()
         {
         GameObject[] waterObjects = GameObject.FindGameObjectsWithTag("Water");
@@ -163,7 +168,6 @@ public class Swiming : MonoBehaviour
         }
         return false;
     }
-		
 
     void FixedUpdate()
     {
@@ -176,13 +180,21 @@ public class Swiming : MonoBehaviour
         anim.SetFloat("SwimX", moveHorizontal);
         anim.SetFloat("SwimY", moveVertical);
 
+		if (moveHorizontal > 0) {
+			anim.SetBool ("LookingRight", true);
+		} else if (moveHorizontal < 0) {
+			anim.SetBool ("LookingRight", false);
+		}
+
         if (moveHorizontal != 0 || moveVertical != 0)
         {
             anim.SetBool("Swimming", true);
+			anim.SetBool ("Moving", true);
         }
         else
         {
             anim.SetBool("Swimming", false);
+			anim.SetBool ("Moving", false);
         }
 
         UpdateSoundState(moveHorizontal != 0 || moveVertical != 0);
@@ -205,7 +217,9 @@ public class Swiming : MonoBehaviour
             {
                 rb2D.gravityScale = 0;
             }
-            rb2D.velocity = new Vector2(moveHorizontal * modified_speed, moveVertical * modified_speed);
+			if (!stunned) {
+				rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, moveVertical * modified_speed);
+			}
         }
 
         else if(InWater() && !IsUnderWater())
@@ -216,14 +230,13 @@ public class Swiming : MonoBehaviour
                 rb2D.gravityScale = 0;
             }
 
-            if (moveVertical > 0)
-            {
-               rb2D.velocity = new Vector2(moveHorizontal * modified_speed, 0);
-            }
-            else
-            {
-               rb2D.velocity = new Vector2(moveHorizontal * modified_speed, moveVertical * modified_speed);
-            }
+			if (!stunned) {
+				if (moveVertical > 0) {
+					rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, 0);
+				} else {
+					rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, moveVertical * modified_speed);
+				}
+			}
             
         }
         

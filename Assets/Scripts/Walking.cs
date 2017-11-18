@@ -7,6 +7,7 @@ public class Walking : MonoBehaviour {
     private Rigidbody2D rb2D;
     public float speed = 2.0f;
     private Collider2D playerCollider;
+	private Animator anim;
 
     [FMODUnity.EventRef]
     private string mainMusic = "event:/Footsteps";
@@ -22,6 +23,7 @@ public class Walking : MonoBehaviour {
 
         rb2D = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
+		anim = GetComponent<Animator>();
 
         FMOD.Studio.PLAYBACK_STATE play_state;
         musicEv.getPlaybackState(out play_state);
@@ -50,9 +52,11 @@ public class Walking : MonoBehaviour {
         {
             if (playerCollider.IsTouching(obj.GetComponent<BoxCollider2D>()))
             {
+				anim.SetBool("Walking", true);
                 return true;
             }
         }
+		anim.SetBool("Walking", false);
         return false;
     }
 
@@ -62,10 +66,18 @@ public class Walking : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+
+		if (moveHorizontal > 0) {
+			anim.SetBool ("LookingRight", true);
+			anim.SetBool ("Moving", true);
+		} else if (moveHorizontal < 0) {
+			anim.SetBool ("LookingRight", false);
+			anim.SetBool ("Moving", true);
+		}
 
         if (OnSurface())
         {
@@ -75,11 +87,13 @@ public class Walking : MonoBehaviour {
 
             if (IsMoving())
             {
+				anim.SetBool ("Moving", true);
                 isWalking.setValue(1.0f);
                 print("Is called");
             }
             else
             {
+				anim.SetBool ("Moving", false);
                 isWalking.setValue(0.0f);
             }
             

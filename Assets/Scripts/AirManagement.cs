@@ -5,16 +5,23 @@ using UnityEngine.UI;
 
 public class AirManagement : MonoBehaviour {
 
-	public int stamina;
+	public float stamina;
+	public float stm;
 	public Text staminaText;
 
 	private bool isDead = false;
 	private bool isWater = true;
+	private SpriteRenderer spriteRenderer;
+	private Color oldColor;
 
 	// Use this for initialization
-	//void Start () {
+	void Start () {
+		
+		stamina = stm * Time.deltaTime;
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+		oldColor = spriteRenderer.color;
 	//	SetStaminaText ();
-	//}
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -22,12 +29,16 @@ public class AirManagement : MonoBehaviour {
 			isDead = true;
 		}
 		if (isWater == true) {
-			stamina -= 1;
+			stamina -= 1 * Time.deltaTime;
+			spriteRenderer.color = new Color (spriteRenderer.color [0], spriteRenderer.color [1], 0.1f + ((Time.deltaTime*stm - stamina)/(Time.deltaTime*stm))/5);
+		} else {
+			spriteRenderer.color = oldColor;
 		}
+
 		//SetStaminaText ();
 	}
 
-    public int getStamina()
+    public float getStamina()
     {
         return stamina;
     }
@@ -42,7 +53,7 @@ public class AirManagement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Air Pocket")) 
 		{
-			stamina = 1000;
+			stamina = stm * Time.deltaTime;
 			isWater = false;
 		}
 	}
