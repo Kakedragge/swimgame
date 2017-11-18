@@ -74,7 +74,7 @@ public class Swiming : MonoBehaviour
 
     }
 
-    private bool IsUnderWater()
+    public bool IsUnderWater()
      {
         GameObject[] airPocketObjects = GameObject.FindGameObjectsWithTag("Air Pocket");
         foreach (GameObject obj in airPocketObjects)
