@@ -9,39 +9,14 @@ public class Walking : MonoBehaviour {
     private Collider2D playerCollider;
 	private Animator anim;
 
-    [FMODUnity.EventRef]
-    private string mainMusic = "event:/Footsteps";
-    FMOD.Studio.ParameterInstance isWalking;
-    FMOD.Studio.EventInstance musicEv;
-
 
     // Use this for initialization
     void Start () {
-
-        musicEv = FMODUnity.RuntimeManager.CreateInstance(mainMusic);
-        musicEv.getParameter("Walking", out isWalking);
 
         rb2D = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
 		anim = GetComponent<Animator>();
 
-        FMOD.Studio.PLAYBACK_STATE play_state;
-        musicEv.getPlaybackState(out play_state);
-
-        if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
-            print("Starts regular sound");
-            if (OnSurface())
-            {
-                isWalking.setValue(1.0f);
-            }
-            else
-            {
-                isWalking.setValue(0.0f);
-            }
-            musicEv.start();
-
-        }
     }
 
     private bool OnSurface()
@@ -87,20 +62,20 @@ public class Walking : MonoBehaviour {
 
             if (IsMoving())
             {
-				anim.SetBool ("Moving", true);
-                isWalking.setValue(1.0f);
+                FindObjectOfType<SoundManager>().UpdateWalking(true);
+                anim.SetBool ("Moving", true);
                 print("Is called");
             }
             else
             {
-				anim.SetBool ("Moving", false);
-                isWalking.setValue(0.0f);
+                FindObjectOfType<SoundManager>().UpdateWalking(false);
+                anim.SetBool ("Moving", false);
             }
             
         }
         else
         {
-            isWalking.setValue(0.0f);
+            FindObjectOfType<SoundManager>().UpdateWalking(false);
         }
     }
 }
