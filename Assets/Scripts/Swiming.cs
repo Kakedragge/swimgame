@@ -23,8 +23,13 @@ public class Swiming : MonoBehaviour
     private float swimmingValue = 1.0f;
 	private bool stunned = false;
     private Animator anim;
-    //Player location states
+    
+	//Player location states
 
+	private int state;
+	private const int IN_WATER = 0;
+	private const int UNDER_WATER = 1;
+	private const int ON_SURFACE = 2;
 
     // Use this for initialization
     void Start()
@@ -38,6 +43,14 @@ public class Swiming : MonoBehaviour
         timeLeft = 0;
         modified_speed = speed;
         anim = GetComponent<Animator>();
+
+		if (IsUnderWater ()) {
+			state = UNDER_WATER;
+		} else if (InWater ()) {
+			state = IN_WATER;
+		} else {
+			state = ON_SURFACE;
+		}
     }
 
 	private void FackYou() {
@@ -171,7 +184,12 @@ public class Swiming : MonoBehaviour
 
         if (IsUnderWater())
         {   
-            
+			if (state == IN_WATER) {
+				FindObjectOfType<SoundManager> ().PlayBreachSplash();
+			}
+
+			state = UNDER_WATER;
+
             if (!isUnderWater)
             {
                 rb2D.gravityScale = 0;
@@ -183,6 +201,14 @@ public class Swiming : MonoBehaviour
 
         else if(InWater() && !IsUnderWater())
         {
+
+			if (state == UNDER_WATER) {
+				FindObjectOfType<SoundManager> ().PlayBreachSplash ();
+			} else if (state == ON_SURFACE) {
+				FindObjectOfType<SoundManager> ().PlayFallSplash ();
+			}
+
+			state = IN_WATER;
 
             if (!isAtWaterSurface)
             {
@@ -201,6 +227,12 @@ public class Swiming : MonoBehaviour
         
         else
         {
+			if (state == IN_WATER) {
+				FindObjectOfType<SoundManager> ().PlayBreachSplash();
+			}
+
+			state = ON_SURFACE;
+
             rb2D.gravityScale = 1.0f;
         }
         FindObjectOfType<SoundManager>().UpdateSwimming(moveHorizontal != 0 || moveVertical != 0, InWater(), swimmingValue);

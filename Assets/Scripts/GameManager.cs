@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour {
 		if (hasEnded == false) {
 			hasEnded = true;
 			print ("Game over");
+			StopMusic ();
+			FindObjectOfType<SoundManager> ().PlayDeath ();
 			StartCoroutine (Fading (false, 1));
 		}
 
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour {
 		if (hasEnded == false) {
 			hasEnded = true;
 			Time.timeScale = 1;
+			StopMusic ();
 			StartCoroutine (Fading (false, 0));
 		}
 	}
@@ -74,14 +77,15 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void LoadScene(int scene)
-    {
-        SceneManager.LoadScene(scene);
-    }
+	{
+		SceneManager.LoadScene(scene);
+	}
 
-    void StopMusic()
-    {
+	void StopMusic()
+	{
+		print ("Stops all music");
 		FindObjectOfType<SoundManager> ().StopAllMusic ();
-    }
+	}
 
 	void PauseMusic(){
 		FindObjectOfType<SoundManager> ().PauseAll ();

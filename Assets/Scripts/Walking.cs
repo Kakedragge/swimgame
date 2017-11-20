@@ -25,6 +25,7 @@ public class Walking : MonoBehaviour {
 
         foreach (GameObject obj in surfaceObjects)
         {
+			print (playerCollider.IsTouching (obj.GetComponent<BoxCollider2D> ()));
             if (playerCollider.IsTouching(obj.GetComponent<BoxCollider2D>()))
             {
 				anim.SetBool("Walking", true);

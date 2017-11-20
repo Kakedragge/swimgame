@@ -9,6 +9,11 @@ TagManager:
   - Water
   - Surface
   - Shark
+  - Jelly Fish
+  - PauseCanvas
+  - Hide Element
+  - FadeImage
+  - HP
   layers:
   - Default
   - TransparentFX

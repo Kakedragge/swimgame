@@ -12,7 +12,7 @@ public class HealthBar : MonoBehaviour {
 	// Use this for initialization
 
 	void Start() {
-		healthBar = GetComponent<Image> ();
+		healthBar = GameObject.FindGameObjectWithTag("HP").GetComponent<Image> ();
 	}
 
 	public void StartUp (float hp) {
