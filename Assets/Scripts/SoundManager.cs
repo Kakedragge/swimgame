@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
 
+
+	[FMODUnity.EventRef]
+	private string splashSound = "event:/Splash";
+
+	[FMODUnity.EventRef]
+	private string breachSound = "event:/WaterSplash";
+
+	[FMODUnity.EventRef]
+	private string sparkSound = "event:/Spark";
+	FMOD.Studio.EventInstance sparkEv;
+
+	[FMODUnity.EventRef]
+	private string exhaleSound = "event:/Exhale";
+	FMOD.Studio.EventInstance exhaleEv;
+
 	[FMODUnity.EventRef]
 	private string walkMusic = "event:/Footsteps";
 	FMOD.Studio.ParameterInstance isWalking;
@@ -28,7 +43,15 @@ public class SoundManager : MonoBehaviour {
     private GameObject shark;
     private int MaxDistance = 2;
 
+	//Sound delays for not making sounds play many times
+
+	private float FallSplashDelay = 0;
+	private float BreachSplashDelay = 0;
+	private float SparkDelay = 0;
+	private bool canPlay;
+
 	void Start(){
+		canPlay = true;
 		InitiliazeMusic ();
 		InitiliazeSwimming ();
 		InitiliazeWalking (false);
@@ -42,7 +65,9 @@ public class SoundManager : MonoBehaviour {
 	}
 
 	public void ResumeAll(){
-		muteParameter.setValue (0.0f);
+		if (canPlay) {
+			muteParameter.setValue (0.0f);
+		}
 	}
 
 	void InitiliazeWalking(bool Walking){
@@ -66,48 +91,93 @@ public class SoundManager : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		FallSplashDelay -= Time.deltaTime;
+		BreachSplashDelay -= Time.deltaTime;
+	}
+
+	public void PlaySpark(){
+		if (canPlay) {
+
+			float sound_length = 1.0f;
+
+			if (FallSplashDelay < 0) {
+				print ("Play spark");
+				FMODUnity.RuntimeManager.PlayOneShot (sparkSound);
+				SparkDelay = sound_length;
+			}
+		}
+	}
+
+	public void PlayFallSplash(){
+
+		if (canPlay) {
+
+			float sound_length = 1.2f;
+
+			if (FallSplashDelay < 0) {
+				print ("Play fall splash");
+				FMODUnity.RuntimeManager.PlayOneShot (splashSound);
+				FallSplashDelay = sound_length;
+			}
+		}
+	}
+
+	public void PlayBreachSplash(){
+
+		if (canPlay) {
+
+			float sound_length = 1.0f;
+
+			if (BreachSplashDelay < 0) {
+				print ("Play breach splash");
+				FMODUnity.RuntimeManager.PlayOneShot (breachSound);
+				BreachSplashDelay = sound_length;
+			}
+
+		}
+	}
+
 	public void UpdateWalking(bool Walking)
     {
-		if (Walking) {
-			isWalking.setValue (1.0f);
-		} 
-		else {
-			isWalking.setValue (0.0f);
+		if (canPlay) {
+			if (Walking) {
+				isWalking.setValue (1.0f);
+			} else {
+				isWalking.setValue (0.0f);
+			}
+		} else {
+			StopWalking ();
 		}
     }
 
     public void UpdateSwimming(bool isMoving, bool inWater, float swimmingValue)
     {
-        FMOD.Studio.PLAYBACK_STATE play_state1;
-        swimEv.getPlaybackState(out play_state1);
+		if (canPlay) {
 
-        if (play_state1 != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-        {
+			FMOD.Studio.PLAYBACK_STATE play_state1;
+			swimEv.getPlaybackState (out play_state1);
 
-            if (!isMoving || !inWater)
-            {
-                isSwimming.setValue(0);
-            }
+			if (play_state1 != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
 
-            else
-            {
-                isSwimming.setValue(swimmingValue);
-            }
+				if (!isMoving || !inWater) {
+					isSwimming.setValue (0);
+				} else {
+					isSwimming.setValue (swimmingValue);
+				}
 
-            swimEv.start();
+				swimEv.start ();
 
-        }
-        else
-        {
-            if (!isMoving || !inWater)
-            {
-                isSwimming.setValue(0);
-            }
-            else
-            {
-                isSwimming.setValue(swimmingValue);
-            }
-        }
+			} else {
+				if (!isMoving || !inWater) {
+					isSwimming.setValue (0);
+				} else {
+					isSwimming.setValue (swimmingValue);
+				}
+			}
+		} else {
+			StopSwimming ();
+		}
     }
 
     public void StopWalking()
@@ -129,6 +199,7 @@ public class SoundManager : MonoBehaviour {
 
     public void InitiliazeMusic()
     {
+		
         dangerEv = FMODUnity.RuntimeManager.CreateInstance(dangerMusic);
         dangerEv.getParameter("end", out volumeParameter);
 
@@ -232,6 +303,8 @@ public class SoundManager : MonoBehaviour {
     {
 
 		print ("Stops music");
+
+		canPlay = false;
 
         musicEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         musicEv.release();

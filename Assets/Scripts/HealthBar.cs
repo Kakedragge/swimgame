@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour {
 	private float ratio;
 	// Use this for initialization
 	void Start () {
-		healthBar = GetComponent<Image> ();
+		healthBar = GameObject.FindGameObjectWithTag("hptag").GetComponent<Image> ();
 		maxHp = 1000;
 		currentHp = 1000;
 		ratio = currentHp / maxHp;

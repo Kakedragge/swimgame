@@ -12,6 +12,8 @@ TagManager:
   - Jelly Fish
   - FadeImage
   - PauseCanvas
+  - hptag
+  - Bubbles
   layers:
   - Default
   - TransparentFX

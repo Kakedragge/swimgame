@@ -21,7 +21,7 @@ public class JellyDmg : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Jelly Fish")) 
 		{
 			GameObject SwimMan = GameObject.Find("SwimMan");
-
+			FindObjectOfType<SoundManager> ().PlaySpark();
 			SendMessage("setStamina", SwimMan.GetComponent<AirManagement>().getStamina() - damage);
 		}
 	}

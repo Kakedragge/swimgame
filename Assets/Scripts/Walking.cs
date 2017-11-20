@@ -8,7 +8,6 @@ public class Walking : MonoBehaviour {
     public float speed = 2.0f;
     private Collider2D playerCollider;
 
-
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();

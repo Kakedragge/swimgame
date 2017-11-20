@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour {
 	void Start(){
 		anim = GameObject.FindGameObjectWithTag("FadeImage"). GetComponent<Animator>();
 		black = GameObject.FindGameObjectWithTag ("FadeImage").GetComponent<Image> ();
+		GameObject.FindGameObjectWithTag ("Bubbles").GetComponent<ParticleSystem> ().Play ();
 	}
 
 	void Update(){
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour {
 		if (hasEnded == false) {
 			hasEnded = true;
 			print ("Game over");
+			StopMusic ();
 			StartCoroutine (Fading (false, 1));
 		}
 
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour {
 		if (hasEnded == false) {
 			hasEnded = true;
 			Time.timeScale = 1;
+			StopMusic ();
 			StartCoroutine (Fading (false, 0));
 		}
 	}
@@ -80,6 +83,7 @@ public class GameManager : MonoBehaviour {
 
     void StopMusic()
     {
+		print ("Stops all music");
 		FindObjectOfType<SoundManager> ().StopAllMusic ();
     }
 
