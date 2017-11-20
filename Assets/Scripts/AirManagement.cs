@@ -11,8 +11,6 @@ public class AirManagement : MonoBehaviour {
 	private bool isDead = false;
 	private bool isWater = true;
 
-
-
 	// Use this for initialization
 	void Start () {
 		FindObjectOfType<HealthBar> ().FullHealthBar();
@@ -43,7 +41,7 @@ public class AirManagement : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Air Pocket")) 
 		{
-			stamina = 1000;
+			FindObjectOfType<HealthBar> ().FullHealthBar();
 			isWater = false;
 		}
 	}

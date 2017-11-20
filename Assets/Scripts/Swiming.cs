@@ -194,6 +194,7 @@ public class Swiming : MonoBehaviour
         {
 			if (state == UNDER_WATER) {
 				FindObjectOfType<SoundManager> ().PlayBreachSplash ();
+				FindObjectOfType<SoundManager> ().PlayExhale ();
 			} else if (state == ON_SURFACE) {
 				FindObjectOfType<SoundManager> ().PlayFallSplash ();
 			}
@@ -225,5 +226,6 @@ public class Swiming : MonoBehaviour
             rb2D.gravityScale = 1.0f;
         }
 		FindObjectOfType<SoundManager> ().UpdateSwimming (moveHorizontal != 0 || moveVertical != 0, InWater(),swimmingValue);
+		FindObjectOfType<SoundManager> ().UpdateMusic ();
     }
 }
