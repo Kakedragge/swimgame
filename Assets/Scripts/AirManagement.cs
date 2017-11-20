@@ -8,6 +8,8 @@ public class AirManagement : MonoBehaviour {
 	public float stamina;
 	public float stm;
 
+	private float staminaMulti = 1;
+
 	private SpriteRenderer spriteRenderer;
 	private Color oldColor;
 
@@ -28,7 +30,7 @@ public class AirManagement : MonoBehaviour {
         }
         else if (FindObjectOfType<Swiming>().IsUnderWater())
         {
-			stamina -= 1 * Time.deltaTime;
+			stamina -= staminaMulti * Time.deltaTime;
 
 			spriteRenderer.color = new Color (spriteRenderer.color [0], spriteRenderer.color [1], 0.1f + ((Time.deltaTime*stm - stamina)/(Time.deltaTime*stm))/5.0f);
 			FindObjectOfType<HealthBar>().UpdateHealthBar(stamina);
@@ -53,6 +55,11 @@ public class AirManagement : MonoBehaviour {
     {
         stamina = newStamina;
     }
+
+	public void setStaminaMulti(int newStaminaMulti)
+	{
+		staminaMulti = newStaminaMulti;
+	}
 
     void OnTriggerEnter2D(Collider2D other) 
 	{

@@ -173,13 +173,15 @@ public class Swiming : MonoBehaviour
         
 		if (Input.GetKey(KeyCode.LeftShift) && IsUnderWater())
 		{
-			modified_speed = 2 * speed;
+			modified_speed = 1.8f * speed;
 			swimmingValue = 0.5f;
+			FindObjectOfType<AirManagement> ().setStaminaMulti (3);
 		}
 		else
 		{
 			modified_speed = speed;
 			swimmingValue = 1.0f;
+			FindObjectOfType<AirManagement> ().setStaminaMulti (1);
 		}
 
         if (IsUnderWater())
