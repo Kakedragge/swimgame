@@ -38,6 +38,15 @@ public class GameManager : MonoBehaviour {
 		Time.timeScale = 1;
 	}
 
+	public void Victory(){
+		if (hasEnded == false) {
+			hasEnded = true;
+			print ("Victory");
+			StartCoroutine (Fading (false, 3));
+		}
+
+	}
+
 	public void RestartGame(){
 		if (hasEnded == false) {
 			hasEnded = true;

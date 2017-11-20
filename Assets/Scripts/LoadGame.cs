@@ -7,6 +7,7 @@ public class LoadGame : MonoBehaviour {
 
 	public void LoadSceneByIndex(int index)
     {
+		FindObjectOfType<StartScreenSound> ().StopStartSound ();
         SceneManager.LoadScene(index);
     }
 }

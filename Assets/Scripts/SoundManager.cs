@@ -5,6 +5,11 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
 
 	[FMODUnity.EventRef]
+	private string tvSound = "event:/TV_noise";
+	FMOD.Studio.ParameterInstance FadeParameter;
+	FMOD.Studio.EventInstance tvEv;
+
+	[FMODUnity.EventRef]
 	private string deathSound = "event:/Death";
 
 	[FMODUnity.EventRef]
@@ -131,6 +136,27 @@ public class SoundManager : MonoBehaviour {
 		}
 	}
 
+	public void PlayTVSound(){
+		FMOD.Studio.PLAYBACK_STATE play_state;
+		tvEv.getPlaybackState(out play_state);
+
+		if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING) {
+			print ("Starts tv sound");
+			FadeParameter.setValue (0.0f);
+			tvEv.start ();
+
+		}
+	}
+
+	public void SetTVFade(float fade){
+		FadeParameter.setValue (fade);
+	}
+
+	public void StopTVSound(){
+		tvEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		tvEv.release();
+	}
+
 	public void PlayFallSplash(){
 
 		if (canPlay) {
@@ -232,6 +258,9 @@ public class SoundManager : MonoBehaviour {
 		musicEv = FMODUnity.RuntimeManager.CreateInstance(mainMusic);
 		musicEv.getParameter("Underwater", out placingParameter);
 		musicEv.getParameter("Shark", out muteParameter);
+
+		tvEv = FMODUnity.RuntimeManager.CreateInstance (tvSound);
+		tvEv.getParameter ("Fade", out FadeParameter);
 
 		player = GameObject.FindGameObjectWithTag("player");
 		shark = GameObject.FindGameObjectWithTag("Shark");
