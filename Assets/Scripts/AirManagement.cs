@@ -16,7 +16,6 @@ public class AirManagement : MonoBehaviour {
         stamina = stm * Time.deltaTime;
 		spriteRenderer = GetComponent<SpriteRenderer> ();
 		oldColor = spriteRenderer.color;
-		FindObjectOfType<HealthBar>().StartUp(stamina);
 	//	SetStaminaText ();
 	}
 	
@@ -38,7 +37,8 @@ public class AirManagement : MonoBehaviour {
         else
         {
 			spriteRenderer.color = oldColor;
-			FindObjectOfType<HealthBar>().UpdateHealthBar(stamina);
+			FindObjectOfType<HealthBar> ().FullHealthBar ();
+			stamina = stm * Time.deltaTime;
         }
 
     }
@@ -59,6 +59,7 @@ public class AirManagement : MonoBehaviour {
 		if (other.gameObject.CompareTag ("Air Pocket")) 
 		{
 			stamina = stm * Time.deltaTime;
+			FindObjectOfType<HealthBar> ().FullHealthBar ();
 		}
 	}
 		

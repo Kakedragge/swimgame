@@ -9,18 +9,19 @@ public class HealthBar : MonoBehaviour {
 	private float maxHp;
 	private float currentHp;
 	private float ratio;
+	private float dangerLow;
 	// Use this for initialization
 
 	void Start() {
 		healthBar = GameObject.FindGameObjectWithTag("HP").GetComponent<Image> ();
+		dangerLow = 0.25f;
+		maxHp = 40;
+		FullHealthBar ();
 	}
 
 	public void StartUp (float hp) {
 		maxHp = hp;
-		currentHp = hp;
-		ratio = currentHp / maxHp;
-		healthBar.rectTransform.localScale = new Vector3 (ratio, 1.0f, 1.0f);
-		healthBar.color = new Color32 (0, 0, 255, 150);
+		FullHealthBar ();
 	}
 	
 	// Update is called once per frame
@@ -28,11 +29,30 @@ public class HealthBar : MonoBehaviour {
 		currentHp = hp;
 		ratio = currentHp / maxHp;
 		healthBar.rectTransform.localScale = new Vector3 (ratio, 1.0f, 1.0f);
-		if (ratio <= 0.25) {
+		FindObjectOfType<SoundManager> ().UpdateHeartBeat (FindHearthBeatPercent(ratio));
+		if (ratio <= dangerLow) {
 			healthBar.color = new Color32 (255, 0, 0, 255);
-		} else if (ratio > 0.25) {
+		} else if (ratio > dangerLow) {
 			healthBar.color = new Color32 (0, 0, 255, 150);
 		}
+	}
+
+	public float FindHearthBeatPercent(float value) {
+		float retVal = 1 - value / dangerLow;
+
+		if (retVal <= 0) {
+			retVal = 0;
+		} else if (retVal > 1) {
+			retVal = 1;
+		} 
+		return retVal;
+	}
+
+	public void FullHealthBar () {
+		currentHp = maxHp;
+		ratio = currentHp / maxHp;
+		healthBar.color = new Color32 (0, 0, 255, 150);
+		FindObjectOfType<SoundManager> ().UpdateHeartBeat (0.0f);
 	}
 		
 }

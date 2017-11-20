@@ -15,16 +15,19 @@ public class SoundManager : MonoBehaviour {
 
 	[FMODUnity.EventRef]
 	private string sparkSound = "event:/Spark";
-	FMOD.Studio.EventInstance sparkEv;
 
 	[FMODUnity.EventRef]
 	private string exhaleSound = "event:/Exhale";
-	FMOD.Studio.EventInstance exhaleEv;
 
 	[FMODUnity.EventRef]
 	private string walkMusic = "event:/Footsteps";
 	FMOD.Studio.ParameterInstance isWalking;
 	FMOD.Studio.EventInstance walkEv;
+
+	[FMODUnity.EventRef]
+	private string heartbeat = "event:/Heartbeat";
+	FMOD.Studio.ParameterInstance strength;
+	FMOD.Studio.EventInstance heartbeatEv;
 
 	[FMODUnity.EventRef]
 	public string swimSound = "event:/Swim";
@@ -51,6 +54,7 @@ public class SoundManager : MonoBehaviour {
 	private float BreachSplashDelay = 0;
 	private float SparkDelay = 0;
 	private bool canPlay;
+	private float ExhaleDelay = 0;
 
 	void Start(){
 		canPlay = true;
@@ -64,6 +68,7 @@ public class SoundManager : MonoBehaviour {
 		muteParameter.setValue (1.0f);
 		volumeParameter.setValue (2.0f);
 		isSwimming.setValue (0.0f);
+		strength.setValue (0.0f);
 	}
 
 	public void ResumeAll(){
@@ -97,6 +102,7 @@ public class SoundManager : MonoBehaviour {
 		FallSplashDelay -= Time.deltaTime;
 		BreachSplashDelay -= Time.deltaTime;
 		SparkDelay -= Time.deltaTime;
+		ExhaleDelay -= Time.deltaTime;
 	}
 
 	public void PlaySpark(){
@@ -108,6 +114,19 @@ public class SoundManager : MonoBehaviour {
 				print ("Play spark");
 				FMODUnity.RuntimeManager.PlayOneShot (sparkSound);
 				SparkDelay = sound_length;
+			}
+		}
+	}
+
+	public void PlayExhale(){
+		if (canPlay) {
+
+			float sound_length = 0.85f;
+
+			if (ExhaleDelay < 0) {
+				print ("Play exhale");
+				FMODUnity.RuntimeManager.PlayOneShot (exhaleSound);
+				ExhaleDelay = sound_length;
 			}
 		}
 	}
@@ -149,9 +168,7 @@ public class SoundManager : MonoBehaviour {
 			} else {
 				isWalking.setValue (0.0f);
 			}
-		} else {
-			StopWalking ();
-		}
+		} 
 	}
 
 	public void UpdateSwimming(bool isMoving, bool inWater, float swimmingValue)
@@ -182,10 +199,16 @@ public class SoundManager : MonoBehaviour {
 			StopSwimming ();
 		}
 	}
+		
+	public void UpdateMusic(){
+		muteParameter.setValue (InDanger ());
+		placingParameter.setValue (FindDepth ());
+		volumeParameter.setValue (FindPlayerDistance ());
+	}
 
-	public void StopWalking()
-	{
-
+	public void UpdateHeartBeat(float value) {
+		print (value);
+		strength.setValue (value);
 	}
 
 	public void StopSwimming()
@@ -213,11 +236,11 @@ public class SoundManager : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("player");
 		shark = GameObject.FindGameObjectWithTag("Shark");
 
-		FMOD.Studio.PLAYBACK_STATE play_state1;
-		dangerEv.getPlaybackState(out play_state1);
-
 		FMOD.Studio.PLAYBACK_STATE play_state;
 		musicEv.getPlaybackState(out play_state);
+
+		heartbeatEv = FMODUnity.RuntimeManager.CreateInstance(heartbeat);
+		heartbeatEv.getParameter ("Strength", out strength);
 
 		if (play_state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 		{
@@ -228,11 +251,25 @@ public class SoundManager : MonoBehaviour {
 
 		}
 
+		FMOD.Studio.PLAYBACK_STATE play_state1;
+		dangerEv.getPlaybackState(out play_state1);
+
 		if (play_state1 != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 		{
 			print("Starts danger sound");
 			volumeParameter.setValue(FindPlayerDistance());
 			dangerEv.start();
+
+		}
+
+		FMOD.Studio.PLAYBACK_STATE play_state2;
+		heartbeatEv.getPlaybackState(out play_state2);
+
+		if (play_state2 != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+		{
+			print("start heart");
+			strength.setValue(0);
+			heartbeatEv.start();
 
 		}
 	}
@@ -271,7 +308,7 @@ public class SoundManager : MonoBehaviour {
 
 	public float InDanger()
 	{
-		if (FindPlayerDistance() < MaxDistance && GetComponent<Swiming>().InDangerZone())
+		if (FindPlayerDistance() < MaxDistance && GameObject.FindGameObjectWithTag("player").GetComponent<Swiming>().InDangerZone())
 		{
 			return 1.0f;
 		}
@@ -284,7 +321,7 @@ public class SoundManager : MonoBehaviour {
 
 	private float FindDepth()
 	{
-		float your_pos = transform.position.y;
+		float your_pos = GameObject.FindGameObjectWithTag("player").transform.position.y;
 		float minPos = 0.9f;
 		float maxPos = -2.2f;
 
@@ -324,6 +361,9 @@ public class SoundManager : MonoBehaviour {
 
 		swimEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		swimEv.release();
+
+		heartbeatEv.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		heartbeatEv.release();
 	}
 
 }
