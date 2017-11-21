@@ -7,7 +7,7 @@ public class EndTrigger : MonoBehaviour {
 
 	private float wait;
 	private bool endStarted = false;
-	private float fadeTime = 10.0f;
+	private float fadeTime = 5.0f;
 	private bool hasEnded = false;
 
 
