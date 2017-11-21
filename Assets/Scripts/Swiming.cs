@@ -23,6 +23,7 @@ public class Swiming : MonoBehaviour
     private float swimmingValue = 1.0f;
 	private bool stunned = false;
     private Animator anim;
+	private bool canMove = true;
     
 	//Player location states
 
@@ -55,6 +56,10 @@ public class Swiming : MonoBehaviour
 
 	private void FackYou() {
 		print ("Fack U");
+	}
+
+	public void DisableSwimming(){
+		canMove = false;
 	}
 
     public bool InDangerZone()
@@ -147,100 +152,91 @@ public class Swiming : MonoBehaviour
 
         //CHECK OUT RAYCASTS
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+		if (canMove) {
 
-        anim.SetFloat("SwimX", moveHorizontal);
-        anim.SetFloat("SwimY", moveVertical);
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			float moveVertical = Input.GetAxis ("Vertical");
 
-		if (moveHorizontal > 0) {
-			anim.SetBool ("LookingRight", true);
-		} else if (moveHorizontal < 0) {
-			anim.SetBool ("LookingRight", false);
-		}
+			anim.SetFloat ("SwimX", moveHorizontal);
+			anim.SetFloat ("SwimY", moveVertical);
+			if (moveHorizontal > 0) {
+				anim.SetBool ("LookingRight", true);
+			} else if (moveHorizontal < 0) {
+				anim.SetBool ("LookingRight", false);
+			}
 
-        if (moveHorizontal != 0 || moveVertical != 0)
-        {
-            anim.SetBool("Swimming", true);
-			anim.SetBool ("Moving", true);
-        }
-        else
-        {
-            anim.SetBool("Swimming", false);
-			anim.SetBool ("Moving", false);
-        }
+			if (moveHorizontal != 0 || moveVertical != 0) {
+				anim.SetBool ("Swimming", true);
+				anim.SetBool ("Moving", true);
+			} else {
+				anim.SetBool ("Swimming", false);
+				anim.SetBool ("Moving", false);
+			}
 
         
-		if (Input.GetKey(KeyCode.LeftShift) && IsUnderWater())
-		{
-			modified_speed = 1.8f * speed;
-			swimmingValue = 0.5f;
-			FindObjectOfType<AirManagement> ().setStaminaMulti (3);
-		}
-		else
-		{
-			modified_speed = speed;
-			swimmingValue = 1.0f;
-			FindObjectOfType<AirManagement> ().setStaminaMulti (1);
-		}
-
-        if (IsUnderWater())
-        {   
-			if (state == IN_WATER) {
-				FindObjectOfType<SoundManager> ().PlayBreachSplash();
+			if (Input.GetKey (KeyCode.LeftShift) && IsUnderWater ()) {
+				modified_speed = 1.8f * speed;
+				swimmingValue = 0.5f;
+				FindObjectOfType<AirManagement> ().setStaminaMulti (3);
+			} else {
+				modified_speed = speed;
+				swimmingValue = 1.0f;
+				FindObjectOfType<AirManagement> ().setStaminaMulti (1);
 			}
 
-			state = UNDER_WATER;
+			if (IsUnderWater ()) {   
+				if (state == IN_WATER) {
+					FindObjectOfType<SoundManager> ().PlayBreachSplash ();
+				}
 
-            if (!isUnderWater)
-            {
-                rb2D.gravityScale = 0;
-            }
-			if (!stunned) {
-				rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, moveVertical * modified_speed);
-			}
-        }
+				state = UNDER_WATER;
 
-        else if(InWater() && !IsUnderWater())
-        {
-
-			if (state == UNDER_WATER) {
-				//FindObjectOfType<SoundManager> ().PlayBreachSplash ();
-				FindObjectOfType<SoundManager> ().PlayExhale ();
-
-			} else if (state == ON_SURFACE) {
-				FindObjectOfType<SoundManager> ().PlayFallSplash ();
-			}
-
-			state = IN_WATER;
-
-            if (!isAtWaterSurface)
-            {
-                rb2D.gravityScale = 0;
-            }
-
-			if (!stunned) {
-				if (moveVertical > 0) {
-					rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, 0);
-				} else {
+				if (!isUnderWater) {
+					rb2D.gravityScale = 0;
+				}
+				if (!stunned) {
 					rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, moveVertical * modified_speed);
 				}
-			}
+			} else if (InWater () && !IsUnderWater ()) {
+
+				if (state == UNDER_WATER) {
+					//FindObjectOfType<SoundManager> ().PlayBreachSplash ();
+					FindObjectOfType<SoundManager> ().PlayExhale ();
+
+				} else if (state == ON_SURFACE) {
+					FindObjectOfType<SoundManager> ().PlayFallSplash ();
+				}
+
+				state = IN_WATER;
+
+				if (!isAtWaterSurface) {
+					rb2D.gravityScale = 0;
+				}
+
+				if (!stunned) {
+					if (moveVertical > 0) {
+						rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, 0);
+					} else {
+						rb2D.velocity = new Vector2 (moveHorizontal * modified_speed, moveVertical * modified_speed);
+					}
+				}
             
-        }
-        
-        else
-        {
-			if (state == IN_WATER) {
-				FindObjectOfType<SoundManager> ().PlayBreachSplash();
+			} else {
+				if (state == IN_WATER) {
+					FindObjectOfType<SoundManager> ().PlayBreachSplash ();
+				}
+
+				state = ON_SURFACE;
+
+				rb2D.gravityScale = 1.0f;
 			}
+			FindObjectOfType<SoundManager> ().UpdateSwimming (moveHorizontal != 0 || moveVertical != 0, InWater (), swimmingValue);
+			FindObjectOfType<SoundManager> ().UpdateMusic ();
 
-			state = ON_SURFACE;
-
-            rb2D.gravityScale = 1.0f;
-        }
-        FindObjectOfType<SoundManager>().UpdateSwimming(moveHorizontal != 0 || moveVertical != 0, InWater(), swimmingValue);
-		FindObjectOfType<SoundManager> ().UpdateMusic ();
+		} else {
+			anim.SetBool ("Moving", false);
+			rb2D.velocity = Vector2.zero;
+		}
     }
 
 }

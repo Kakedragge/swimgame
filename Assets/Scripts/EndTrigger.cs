@@ -22,6 +22,7 @@ public class EndTrigger : MonoBehaviour {
 			wait -= 1 * Time.deltaTime;
 			FindObjectOfType<Visibility> ().Darken ();
 			if (wait < 0 && !hasEnded) {
+				FindObjectOfType<Walking> ().DisableWalking ();
 				FindObjectOfType<TurnOnTv> ().TurnOn ();
 				FindObjectOfType<SoundManager> ().StopAllMusic ();
 				FindObjectOfType<SoundManager> ().PlayTVSound ();

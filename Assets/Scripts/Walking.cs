@@ -8,7 +8,7 @@ public class Walking : MonoBehaviour {
     public float speed = 2.0f;
     private Collider2D playerCollider;
 	private Animator anim;
-
+	private bool canMove = true;
 
     // Use this for initialization
     void Start () {
@@ -41,42 +41,47 @@ public class Walking : MonoBehaviour {
         return 0 != Input.GetAxis("Horizontal");
     }
 
+	public void DisableWalking(){
+		canMove = false;
+	}
+
     // Update is called once per frame
     void FixedUpdate () {
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+		if (canMove) {
 
-		if (moveHorizontal > 0) {
-			anim.SetBool ("LookingRight", true);
-			anim.SetBool ("Moving", true);
-		} else if (moveHorizontal < 0) {
-			anim.SetBool ("LookingRight", false);
-			anim.SetBool ("Moving", true);
+		float moveHorizontal = Input.GetAxis ("Horizontal");
+		float moveVertical = Input.GetAxis ("Vertical");
+
+			if (moveHorizontal > 0) {
+				anim.SetBool ("LookingRight", true);
+				anim.SetBool ("Moving", true);
+			} else if (moveHorizontal < 0) {
+				anim.SetBool ("LookingRight", false);
+				anim.SetBool ("Moving", true);
+			}
+
+			if (OnSurface ()) {
+				FindObjectOfType<HealthBar> ().FullHealthBar ();
+				rb2D.gravityScale = 0.5f;
+				rb2D.velocity = new Vector2 (moveHorizontal * speed, rb2D.velocity.y);
+
+				if (IsMoving ()) {
+					FindObjectOfType<SoundManager> ().UpdateWalking (true);
+					anim.SetBool ("Moving", true);
+					print ("Is called");
+				} else {
+					FindObjectOfType<SoundManager> ().UpdateWalking (false);
+					anim.SetBool ("Moving", false);
+				}
+            
+			} else {
+				FindObjectOfType<SoundManager> ().UpdateWalking (false);
+			}
 		}
-
-        if (OnSurface())
-        {
-            
-            rb2D.gravityScale =  0.5f;
-            rb2D.velocity = new Vector2(moveHorizontal * speed, rb2D.velocity.y);
-
-            if (IsMoving())
-            {
-                FindObjectOfType<SoundManager>().UpdateWalking(true);
-                anim.SetBool ("Moving", true);
-                print("Is called");
-            }
-            else
-            {
-                FindObjectOfType<SoundManager>().UpdateWalking(false);
-                anim.SetBool ("Moving", false);
-            }
-            
-        }
-        else
-        {
-            FindObjectOfType<SoundManager>().UpdateWalking(false);
-        }
-    }
+		else{
+			anim.SetBool ("Moving", false);
+			rb2D.velocity = Vector2.zero;
+		}
+	}
 }

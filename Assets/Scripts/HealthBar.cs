@@ -52,6 +52,7 @@ public class HealthBar : MonoBehaviour {
 		currentHp = maxHp;
 		ratio = currentHp / maxHp;
 		healthBar.color = new Color32 (0, 0, 255, 150);
+		healthBar.rectTransform.localScale = new Vector3 (ratio, 1.0f, 1.0f);
 		FindObjectOfType<SoundManager> ().UpdateHeartBeat (0.0f);
 	}
 		

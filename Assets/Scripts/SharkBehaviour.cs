@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SharkBehaviour : MonoBehaviour {
-
-
     
-    public float MaxDistance = 2;
+    public float MaxDistance = 0.5f;
     private float DangerZone;
 	public float travelDistance;
     private bool reverse = false;
@@ -19,12 +17,16 @@ public class SharkBehaviour : MonoBehaviour {
 	private float speedX;
 	private float speedY;
 
+	private bool isRight;
+
+
     private GameObject shark;
     private GameObject player;
     private uint dangerSoundId = 0;
     private bool inDanger = false;
 	private bool isHiding;
 	private Animator anim;
+	private bool canMove = true;
 
     // Use this for initialization
     void Start () {
@@ -49,6 +51,9 @@ public class SharkBehaviour : MonoBehaviour {
     void Update () {
 
         shark.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+
+		if(canMove){
+
 		if (SharkOnPath() && (FindPlayerDistance() > MaxDistance || isHiding))
         {
             float step = speed * Time.deltaTime;
@@ -60,6 +65,13 @@ public class SharkBehaviour : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, EndPos, step);
 				anim.SetFloat("speedX", Xposition - transform.position [0]);
 				anim.SetFloat("speedY", Yposition - transform.position [1]);
+
+				if (Xposition - transform.position [0] > 0) {
+					isRight = true;
+				} else {
+					isRight = false;
+				}
+
                 if(transform.position.x >= EndPos.x)
                 {
                     reverse = !reverse;
@@ -72,6 +84,13 @@ public class SharkBehaviour : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, StartPos, step);
 				anim.SetFloat("speedX", Xposition - transform.position [0]);
 				anim.SetFloat("speedY", Yposition - transform.position [1]);
+
+				if (Xposition - transform.position [0] > 0) {
+					isRight = true;
+				} else {
+					isRight = false;
+				}
+
                 if(transform.position.x <= StartPos.x)
                 {
                     reverse = !reverse;
@@ -87,7 +106,11 @@ public class SharkBehaviour : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
 			anim.SetFloat("speedX", Xposition - transform.position [0]);
 			anim.SetFloat("speedY", Yposition - transform.position [1]);
-            
+			if (Xposition - transform.position [0] > 0) {
+				isRight = true;
+			} else {
+				isRight = false;
+			}
         }
         else
         {
@@ -96,12 +119,20 @@ public class SharkBehaviour : MonoBehaviour {
 			GoBackOnPath(speed * Time.deltaTime);
 			anim.SetFloat("speedX", Xposition - transform.position [0]);
 			anim.SetFloat("speedY", Yposition - transform.position [1]);
+			if (Xposition - transform.position [0] > 0) {
+				isRight = true;
+			} else {
+				isRight = false;
+			}
             reverse = false;
 			//print ("Go back");
-        }
+			}
+		}
     }
 
-    
+	public void StopMoving(){
+		canMove = false;
+	}
 
     public bool SharkOnPath()
     {
@@ -150,12 +181,20 @@ public class SharkBehaviour : MonoBehaviour {
 
     }
 
+	public float getDirection(){
+		if (isRight) {
+			return 1;
+		}
+		return -1;
+	}
+
     public float FindPlayerDistance()
     {
+
         float start_X = player.transform.position.x;
         float start_Y = player.transform.position.y;
 
-        float end_X = shark.transform.position.x;
+		float end_X = shark.transform.position.x;
         float end_Y = shark.transform.position.y;
 
         float distance = FindDistance(start_X, start_Y, end_X, end_Y);
